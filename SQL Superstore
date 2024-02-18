@@ -40,7 +40,7 @@ select count (item_name)
 from superstore
 where category = 'Kitchen Supplies' and price < 50;
 
-#The average rating of items in the 'Electronics' category is shown by this code.
+#The average rating of items in the 'Electronics' category is shown here.
 select AVG (average_rating)
 from superstore
 where category = 'Electronics';

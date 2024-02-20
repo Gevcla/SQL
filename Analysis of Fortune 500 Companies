@@ -1,4 +1,4 @@
-#Here is the data used for the following anaylsis
+#Here is the data used for the following anaylsis.
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,
     company_name TEXT,

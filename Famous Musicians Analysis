@@ -1,0 +1,48 @@
+#The following is a database I made from artists on spotify.
+CREATE TABLE singers_and_bands (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    number_of_albums INTEGER,
+    number_of_spotify_monthly_listeners INTEGER);
+    
+INSERT INTO singers_and_bands (name, number_of_albums, number_of_spotify_monthly_listeners) VALUES ('Taylor Swift', 10, 104700000);
+INSERT INTO singers_and_bands (name, number_of_albums, number_of_spotify_monthly_listeners) VALUES ('Olivia Rodrigo', 2, 59400000);
+INSERT INTO singers_and_bands (name, number_of_albums, number_of_spotify_monthly_listeners) VALUES ('Tennis', 7, 800500);
+INSERT INTO singers_and_bands (name, number_of_albums, number_of_spotify_monthly_listeners) VALUES ('The Smiths', 5, 15700000);
+INSERT INTO singers_and_bands (name, number_of_albums, number_of_spotify_monthly_listeners) VALUES ('Mitski', 7, 38900000);
+
+CREATE TABLE most_popular_song (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    most_popular_song TEXT,
+    song_length TEXT);
+    
+INSERT INTO most_popular_song (most_popular_song, song_length) VALUES ('Cruel Summer', '2:58');
+INSERT INTO most_popular_song (most_popular_song, song_length) VALUES ('Vampire', '3:39');
+INSERT INTO most_popular_song (most_popular_song, song_length) VALUES ('Origins', '3:28');
+INSERT INTO most_popular_song (most_popular_song, song_length) VALUES ('There Is a Light That Never Goes Out', '4:04');
+INSERT INTO most_popular_song (most_popular_song, song_length) VALUES ('My Love Mine All Mine', '2:17');
+
+CREATE TABLE tours (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    toured_in_the_last_5_years TEXT
+    );
+
+INSERT INTO tours (toured_in_the_last_5_years) VALUES ('Yes');
+INSERT INTO tours (toured_in_the_last_5_years) VALUES ('Yes');
+INSERT INTO tours (toured_in_the_last_5_years) VALUES ('Yes');
+INSERT INTO tours (toured_in_the_last_5_years) VALUES ('No');
+INSERT INTO tours (toured_in_the_last_5_years) VALUES ('Yes');
+
+#How many albums and monthly listeners does each artist have?
+SELECT name, number_of_albums, number_of_spotify_monthly_listeners
+FROM singers_and_bands
+ORDER BY number_of_spotify_monthly_listeners desc;
+
+#What is the most popular song for each artist? How long is the song? And have they toured in the last 5 years?
+SELECT name, most_popular_song, song_length, toured_in_the_last_5_years
+FROM most_popular_song
+JOIN tours
+ON tours.id = most_popular_song.id
+JOIN singers_and_bands
+ON singers_and_bands.id = tours.id
+ORDER BY number_of_spotify_monthly_listeners desc;

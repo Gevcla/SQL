@@ -88,6 +88,5 @@ FROM JanSales
 GROUP BY product
 ORDER BY revenue desc 
 LIMIT 1;
-GROUP BY product
 
 

@@ -49,5 +49,45 @@ AND orderid <> 'Order ID';
 #List all the products sold in Los Angeles in February, and include how many of each were sold.
 SELECT product, SUM(quantity)
 FROM febsales
-WHERE location like '%Los Angeles%'
+WHERE location like '%Los Angeles%';
+
+#Which locations in New York received at least 3 orders in January, and how many orders did they each receive?
+SELECT location, count (orderID) number_of_orders
+FROM JanSales
+WHERE location like '%NY%'
+AND length(orderid) = 6 
+AND orderid <> 'Order ID'
+GROUP BY location
+HAVING number_of_orders >= 3;
+
+#How many of each type of headphone were sold in February?
+SELECT product, SUM(quantity) quantity
+FROM FebSales
+WHERE Product like '%Headphones%'
+GROUP BY product;
+
+#What was the average amount spent per account in February?
+SELECT AVG(price*quantity)
+FROM customers cust
+LEFT JOIN FebSales sales
+ON sales.orderID = cust.order_ID
+AND length(orderid) = 6 
+AND orderid <> 'Order ID';
+
+#What was the average quantity of products purchased per account in February?
+SELECT SUM(quantity)/count(acctnum) average
+FROM FebSales sales
+LEFT JOIN customers cust
+ON sales.orderID = cust.order_ID
+WHERE length(orderid) = 6 
+AND orderid <> 'Order ID';
+
+#Which product brought in the most revenue in January and how much revenue did it bring in total?
+SELECT product, SUM (quantity*price)revenue
+FROM JanSales 
 GROUP BY product
+ORDER BY revenue desc 
+LIMIT 1;
+GROUP BY product
+
+

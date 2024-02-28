@@ -1,0 +1,37 @@
+#Show all songs with a popularity of 90 or more that have a tempo of 150 or more
+SELECT track_name, artist_name, tempo, popularity
+FROM SpotifyData
+WHERE popularity >= 90
+AND tempo >= 150
+ORDER BY popularity desc;
+
+#Which artists had the most songs in the list and how many songs did they have?
+SELECT artist_name, COUNT(track_id) number_of_tracks
+FROM Spotifydata
+GROUP BY artist_name
+ORDER BY number_of_tracks desc
+LIMIT 5;
+
+#What is the average popularity of the top 5 most popular songs?
+WITH top_5 AS
+    (SELECT
+    popularity
+    FROM SpotifyData
+    ORDER BY popularity desc
+    LIMIT 5)
+
+SELECT AVG(popularity) average_popularity
+from top_5;
+
+What is the tempo and danceability of the top 5 slowest songs?
+SELECT artist_name, track_name, tempo, danceability
+FROM SpotifyData
+ORDER BY tempo asc
+LIMIT 5;
+
+Which artist has the least amount of minutes on the list and how many minutes do they have?
+SELECT artist_name, SUM(duration_ms)*.001/60 minutes
+FROM SpotifyData
+GROUP BY artist_name
+ORDER BY minutes asc
+LIMIT 1
